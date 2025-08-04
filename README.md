@@ -17,4 +17,6 @@ Once the terminal server is running you can add the station by deploying the lab
 
 ## Laboratories
 ### Blink
-[<img src="https://img.shields.io/badge/%F0%9F%9A%80%20-%20Deploy%20Lab%20-%20light?style=plastic" height="25" />](https://edrys-labs.github.io/?/deploy/https://raw.githubusercontent.com/DM-3/lab-stm-adc-dma/main/laboratory/blink.yaml)
+[<img src="https://img.shields.io/badge/%F0%9F%9A%80%20-%20Deploy%20Lab%20-%20light?style=plastic" height="25" />](https://edrys-labs.github.io/?/deploy/https://github.com/FlorianKatzenschwanz/Edrys_Lab/blob/4fe47a00c083eff2110c28fc357052862955cb84/laboratory/lab.yml)
+
+
