@@ -1,0 +1,104 @@
+name: STM Blink
+members:
+  teacher: []
+  student: []
+modules:
+  - url: https://edrys-labs.github.io/module-markdown-it/index.html
+    config:
+      content: |
+        ## Introduction to using DMA on an STM32
+    studentConfig:
+      content: ''
+    teacherConfig:
+      content: '## Welcome for Teachers'
+    stationConfig:
+      content: ''
+    showInCustom: lobby
+    width: full
+    height: huge
+  - url: https://edrys-labs.github.io/module-editor/index.html
+    config:
+      runCommand: execute
+      language: cpp
+      theme: light
+      editorText: |
+        // minimal blinking LED example
+        #define LED_PIN               GPIO_PIN_5
+        #define LED_GPIO_PORT         GPIOA
+        #define LED_GPIO_CLK_ENABLE() __HAL_RCC_GPIOA_CLK_ENABLE()
+
+        int main(void)
+        {
+          HAL_Init();
+          
+          LED_GPIO_CLK_ENABLE();
+          
+          GPIO_InitTypeDef GPIO_InitStruct;
+          
+          GPIO_InitStruct.Pin = LED_PIN;
+          GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
+          GPIO_InitStruct.Pull = GPIO_PULLUP;
+          GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_HIGH;
+          HAL_GPIO_Init(LED_GPIO_PORT, &GPIO_InitStruct); 
+
+          SysTick_Config(SystemCoreClock / 1000);
+
+          while (1)
+          {
+            HAL_GPIO_TogglePin(LED_GPIO_PORT, LED_PIN);
+            
+            HAL_Delay(1000);
+          }
+        }
+      synchronize: false
+    showInCustom: station
+    width: full
+    height: medium
+  - url: https://edrys-labs.github.io/module-markdown-it/index.html
+    config:
+      content: '## Step 1: Run the code snippet'
+    studentConfig:
+      content: ''
+    teacherConfig:
+      content: ''
+    stationConfig:
+      content: ''
+    showInCustom: station
+    width: full
+    height: huge
+  - url: https://edrys-labs.github.io/module-station-stream/index.html
+    stationConfig:
+      video: true
+      audio: false
+    showInCustom: station
+    width: half
+    height: medium
+  - url: https://edrys-labs.github.io/module-pyxtermjs/index.html
+    stationConfig:
+      server: http://localhost:5000/pty
+      execute: execute
+      script: >
+        mkdir build 
+
+        mkdir stm32
+
+
+        echo $CODE | base64 --decode > stm32/stm32.ino
+
+
+        arduino-cli compile --fqbn
+        STMicroelectronics:stm32:Nucleo_64:pnum=NUCLEO_F401RE stm32 --build-path
+        build --upload
+      enable:
+        teacher: true
+        student: true
+    showInCustom: station
+    width: half
+    height: medium
+meta:
+  logo: https://github.com/DM-3/lab-stm-adc-dma/blob/main/media/stm32f401re.jpg
+  description: ''
+  selfAssign: true
+  defaultNumberOfRooms: 0
+createdBy: G2CCOyc6yg91
+dateCreated: 1751547218666
