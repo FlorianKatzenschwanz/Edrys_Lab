@@ -1,4 +1,4 @@
-id: lykDCAgdtV1CHauQ
+id: E8bzTgY6FLo9EZ2T
 createdBy: U1ksakEb0D1p
 dateCreated: 1751547218666
 name: STM Data via Audio
@@ -14,7 +14,7 @@ modules:
   - url: https://edrys-labs.github.io/module-markdown-it/index.html
     config:
       content: |
-        ## Introduction to using DMA on an STM32
+        ## Using I2S to transfer Data
     studentConfig:
       content: ''
     teacherConfig:
@@ -36,7 +36,13 @@ modules:
     height: medium
   - url: https://edrys-labs.github.io/module-markdown-it/index.html
     config:
-      content: '## Step 1: Run the code snippet'
+      content: >-
+        ## Step 1: Run the code snippet
+
+        ## Step 2: Watch the messages returned via CAN Bus
+
+        to stop the Serial Monitor in the Terminal, you have to press Ctrl+C
+        after clicking into it
     studentConfig:
       content: ''
     teacherConfig:
@@ -60,10 +66,11 @@ modules:
       script: |-
         git clone https://github.com/FlorianKatzenschwanz/Edrys_Lab.git
         cd Edrys_Lab/Code
-
         echo $CODE | base64 --decode > src/main.c
-
-        pio run
+        pio run --target upload
+        cd..
+        cd..
+        pio device monitor -b 9600
       enable:
         teacher: true
         student: true

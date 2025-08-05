@@ -57,9 +57,6 @@ void PendSV_Handler(void);
 void SysTick_Handler(void);
 void CAN1_RX0_IRQHandler(void);
 /* USER CODE BEGIN EFP */
-extern union CAN_Recieved_data;
-extern volatile uint8_t MsgData[8];
-extern volatile CAN_RxHeaderTypeDef RXHeader;
 /* USER CODE END EFP */
 
 #ifdef __cplusplus

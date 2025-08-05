@@ -28,6 +28,7 @@ extern "C" {
 
 /* Includes ------------------------------------------------------------------*/
 #include "stm32f4xx_hal.h"
+#include "../lib/Init/Src/Inits.h"
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
@@ -46,9 +47,8 @@ union CAN_Recieved {
       	}__attribute__((packed));
       };
 extern union CAN_Recieved CAN_Recieved_data;
-extern volatile uint8_t MsgData[8];
-extern volatile CAN_RxHeaderTypeDef RXHeader;
-extern volatile int canrecieved;
+
+
 /* USER CODE END ET */
 
 /* Exported constants --------------------------------------------------------*/
