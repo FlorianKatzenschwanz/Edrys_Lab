@@ -25,7 +25,6 @@ int main(void)
 
 	  HAL_I2S_Transmit(&hi2s1, (uint16_t*)signal, nsamples, 1000);
     HAL_IWDG_Refresh(&hiwdg);
-    HAL_Delay(500);
 	  }
 }
 
