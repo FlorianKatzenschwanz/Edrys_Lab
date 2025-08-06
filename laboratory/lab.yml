@@ -1,5 +1,5 @@
-id: A506ydXbNGwFVQc7
-createdBy: U1ksakEb0D1p
+id: uDhwqkFKJ2koJfRu
+createdBy: rC9RSsadcXJY
 dateCreated: 1751547218666
 name: STM Data via Audio
 meta:
@@ -52,13 +52,6 @@ modules:
     showInCustom: station
     width: full
     height: huge
-  - url: https://edrys-labs.github.io/module-station-stream/index.html
-    stationConfig:
-      video: true
-      audio: false
-    showInCustom: station
-    width: half
-    height: medium
   - url: https://edrys-labs.github.io/module-pyxtermjs/index.html
     stationConfig:
       server: http://localhost:5000/pty
@@ -75,4 +68,4 @@ modules:
         student: true
     showInCustom: station
     width: half
-    height: medium
+    height: tall
