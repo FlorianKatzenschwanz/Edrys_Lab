@@ -12,6 +12,7 @@ extern CAN_FilterTypeDef sFilterConfig;
 extern CAN_RxHeaderTypeDef RXHeader;
 extern IWDG_HandleTypeDef hiwdg;
 
+extern uint8_t printdata;
 
 void Initialize(void);
 void HAL_CAN_RxFifo0MsgPendingCallback(CAN_HandleTypeDef *hcan);
