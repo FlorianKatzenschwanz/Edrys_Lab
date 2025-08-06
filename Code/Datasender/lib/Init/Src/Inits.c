@@ -9,6 +9,8 @@ CAN_HandleTypeDef hcan1;
 I2S_HandleTypeDef hi2s1;
 UART_HandleTypeDef huart3;
 CAN_RxHeaderTypeDef RXHeader;
+IWDG_HandleTypeDef hiwdg;
+
 uint8_t RXData[8];
 
 
@@ -32,6 +34,7 @@ void Initialize(void) {
   MX_CAN1_Init();
   MX_I2S1_Init();
   MX_USART3_UART_Init();
+  MX_IWDG_Init();
 
   // Configure CAN filter
   HAL_CAN_ConfigFilter(&hcan1, &sFilterConfig);
@@ -150,6 +153,29 @@ void MX_I2S1_Init(void)
   /* USER CODE BEGIN I2S1_Init 2 */
 
   /* USER CODE END I2S1_Init 2 */
+
+}
+
+void MX_IWDG_Init(void)
+{
+
+  /* USER CODE BEGIN IWDG_Init 0 */
+
+  /* USER CODE END IWDG_Init 0 */
+
+  /* USER CODE BEGIN IWDG_Init 1 */
+
+  /* USER CODE END IWDG_Init 1 */
+  hiwdg.Instance = IWDG;
+  hiwdg.Init.Prescaler = IWDG_PRESCALER_16;
+  hiwdg.Init.Reload = 2000;
+  if (HAL_IWDG_Init(&hiwdg) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  /* USER CODE BEGIN IWDG_Init 2 */
+
+  /* USER CODE END IWDG_Init 2 */
 
 }
 
