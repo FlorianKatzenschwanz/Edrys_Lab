@@ -1,5 +1,5 @@
 # lab-stm-data via Audio
-Laboratories for the course "Software Development for Embedded Systems" at the TU Freiberg, demonstrating the use of DMA on an STM32 controller.
+Laboratories for the course "Software Development for Embedded Systems" at the TU Freiberg, demonstrating the use of I2S to transfer data on a STM32 controller.
 
 
 ## Board
@@ -12,6 +12,9 @@ To host a station, there are two options:
 - **Local (less secure)**  
   You can install the server locally by following the instructions in the [module-pyxtermjs](https://github.com/edrys-labs/module-pyxtermjs).
 
+-**Docker (more secure)**
+  not working with STM32
+  
 Once the terminal server is running you can add the station by deploying the laboratory and clicking the link under Settings > Station.
 
 

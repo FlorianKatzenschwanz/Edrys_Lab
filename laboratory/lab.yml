@@ -1,4 +1,4 @@
-id: qK20vPcY5ZlOm1tn
+id: XW14w89v0HL7Tclk
 createdBy: rC9RSsadcXJY
 dateCreated: 1751547218666
 name: STM Data via Audio
@@ -8,7 +8,8 @@ meta:
   selfAssign: true
   defaultNumberOfRooms: 0
 members:
-  teacher: []
+  teacher:
+    - rC9RSsadcXJY
   student: []
 modules:
   - url: https://edrys-labs.github.io/module-markdown-it/index.html
@@ -126,4 +127,17 @@ modules:
         student: true
     showInCustom: station
     width: half
+    height: tall
+  - url: https://edrys-labs.github.io/module-editor/index.html
+    config:
+      runCommand: ''
+      language: ''
+      theme: vs-light
+      editorText: "//example code\n\n#include \"main.h\"\n#include \"../lib/Init/Src/Inits.h\"\n\nint main(void)\n{\n\n Initialize();\n\n  int16_t signal[10];\n  int nsamples = sizeof(signal) / sizeof(signal[0]);\n  signal[0] = 0;\n  signal[1] = 32767;\n  signal[2] = 0;\n  signal[3] = -32768;\n\n  uint16_t id = 0x600;\n  signal[4] = id;\n  signal[5] = 100;\n  signal[6] = 200;\n  signal[7] = 1000;\n  signal[8] = 20000;\n\n  while (1)\n  {\n\n\t  HAL_I2S_Transmit(&hi2s1, (uint16_t*)signal, nsamples, 1000);\n    HAL_IWDG_Refresh(&hiwdg);\n\t  }\n}\n\nvoid Error_Handler(void)\n{\n  /* USER CODE BEGIN Error_Handler_Debug */\n  /* User can add his own implementation to report the HAL error return state */\n  __disable_irq();\n  while (1)\n  {\n  }\n  /* USER CODE END Error_Handler_Debug */\n}"
+      synchronize: false
+    studentConfig: ''
+    teacherConfig: ''
+    stationConfig: ''
+    showInCustom: station, teacher
+    width: full
     height: tall
