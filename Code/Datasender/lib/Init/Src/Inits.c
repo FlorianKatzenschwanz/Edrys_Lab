@@ -12,7 +12,7 @@ CAN_RxHeaderTypeDef RXHeader;
 IWDG_HandleTypeDef hiwdg;
 
 uint8_t RXData[8];
-uint8_t printdata = 1000;
+uint16_t printdata;
 
 
 CAN_FilterTypeDef sFilterConfig = {
@@ -51,10 +51,11 @@ void HAL_CAN_RxFifo0MsgPendingCallback(CAN_HandleTypeDef *hcan) {
 			HAL_CAN_GetRxMessage(hcan, CAN_RX_FIFO0, &RXHeader, RXData);
 			uint8_t buffer[300] = {'\0'};
 		  sprintf(buffer, "\n\n\r ID: %d \n\r Data 0: %d \n\r Data 1:%d \n\r Data 2: %d \n\r Data 3: %d \n\r Data 4: %d \n\r Data 5: %d \n\r Data 6: %d \n\r Data 7: %d \n \n\r", RXHeader.DLC, RXData[0], RXData[1], RXData[2], RXData[3], RXData[4], RXData[5], RXData[6], RXData[7]);
-		  if (printdata < 200) {
-      HAL_UART_Transmit(&huart3, buffer, sizeof(buffer), HAL_MAX_DELAY);
-      printdata = 1200; // Reset printdata to 1200 after transmission
-		}
+		  if (printdata < 20) {
+        //sprintf(buffer, "printdata: %d\n", printdata);
+        HAL_UART_Transmit(&huart3, (uint8_t*)buffer, sizeof(buffer), HAL_MAX_DELAY);
+        printdata = 200000; // Reset printdata to 200000 after transmission
+		  }
 }
 
 void SystemClock_Config(void)
