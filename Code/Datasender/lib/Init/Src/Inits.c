@@ -49,7 +49,7 @@ void Initialize(void) {
 void HAL_CAN_RxFifo0MsgPendingCallback(CAN_HandleTypeDef *hcan) {
 			HAL_CAN_GetRxMessage(hcan, CAN_RX_FIFO0, &RXHeader, RXData);
 			uint8_t buffer[300] = {'\0'};
-		  sprintf(buffer, "\n\n\r ID: %d \n\r Data0: %d \n\r Data 1:%d \n\r Data 2: %d \n\r Data 3: %d \n\r Data 4: %d \n\r Data 5: %d \n\r Data 6: %d \n\r Data 7: %d \n \n\r", RXHeader.DLC, RXData[0], RXData[1], RXData[2], RXData[3], RXData[4], RXData[5], RXData[6], RXData[7]);
+		  sprintf(buffer, "\n\n\r ID: %d \n\r Data 0: %d \n\r Data 1:%d \n\r Data 2: %d \n\r Data 3: %d \n\r Data 4: %d \n\r Data 5: %d \n\r Data 6: %d \n\r Data 7: %d \n \n\r", RXHeader.DLC, RXData[0], RXData[1], RXData[2], RXData[3], RXData[4], RXData[5], RXData[6], RXData[7]);
 		  HAL_UART_Transmit(&huart3, buffer, sizeof(buffer), HAL_MAX_DELAY);
 		}
 
@@ -168,7 +168,7 @@ void MX_IWDG_Init(void)
   /* USER CODE END IWDG_Init 1 */
   hiwdg.Instance = IWDG;
   hiwdg.Init.Prescaler = IWDG_PRESCALER_16;
-  hiwdg.Init.Reload = 2000;
+  hiwdg.Init.Reload = 4000;
   if (HAL_IWDG_Init(&hiwdg) != HAL_OK)
   {
     Error_Handler();
