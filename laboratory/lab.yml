@@ -65,9 +65,10 @@ modules:
       execute: execute
       script: |-
         git clone https://github.com/FlorianKatzenschwanz/Edrys_Lab.git
-        cd Edrys_Lab/Code
+        cd Edrys_Lab/Code/Datasender
         echo $CODE | base64 --decode > src/main.c
         pio run --target upload
+        cd..
         cd..
         cd..
         pio device monitor -b 9600
