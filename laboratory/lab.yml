@@ -1,4 +1,4 @@
-id: uDhwqkFKJ2koJfRu
+id: qK20vPcY5ZlOm1tn
 createdBy: rC9RSsadcXJY
 dateCreated: 1751547218666
 name: STM Data via Audio
@@ -29,7 +29,7 @@ modules:
       runCommand: execute
       language: cpp
       theme: light
-      editorText: "#include \"main.h\"\n#include \"../lib/Init/Src/Inits.h\"\n\nint main(void)\n{\n\n Initialize();\n\n  int16_t signal[10];\n  int nsamples = sizeof(signal) / sizeof(signal[0]);\n  signal[0] = 0;\n  signal[1] = 32767;\n  signal[2] = 0;\n  signal[3] = -32768;\n\n  uint16_t id = 0x600;\n  signal[4] = id;\n  signal[5] = 100;\n  signal[6] = 200;\n  signal[7] = 1000;\n  signal[8] = 20000;\n\n  while (1)\n  {\n\n\t  HAL_I2S_Transmit(&hi2s1, (uint16_t*)signal, nsamples, 1000);\n\t  HAL_IWDG_Refresh(&hiwdg);\n\t  }\n}\n\nvoid Error_Handler(void)\n{\n  /* USER CODE BEGIN Error_Handler_Debug */\n  /* User can add his own implementation to report the HAL error return state */\n  __disable_irq();\n  while (1)\n  {\n  }\n  /* USER CODE END Error_Handler_Debug */\n}"
+      editorText: "#include \"main.h\"\n#include \"../lib/Init/Src/Inits.h\"\n\nint main(void)\n{\n\n  Initialize();   // this function initializes the chip an all communication protocols\n// Add your variables here\n\n  while (1)\n  {\n      // add code which should be run repeatedly here, do not add a delay\n\t  HAL_IWDG_Refresh(&hiwdg);     // Resets the counter for the Watchdog\n\t  }\n}\n\n/* The Error Handler gets called, when one of the communication interfaces could not be configured\n or some major error occurs during runtime*/\n\nvoid Error_Handler(void)  \n{\n  __disable_irq();    //Disable Interrupt\n  while (1)           //Wait forever\n  {\n  }\n}"
       synchronize: false
     showInCustom: station
     width: full
@@ -37,12 +37,70 @@ modules:
   - url: https://edrys-labs.github.io/module-markdown-it/index.html
     config:
       content: >-
-        ## Step 1: Run the code snippet
+        # Using Audio to transfer Data
 
-        ## Step 2: Watch the messages returned via CAN Bus
+        In this station the I2S Audioprotocol is used to transfer data from one
+        STM32 to another one. The data is then automatically returned via
+        CAN-Bus an printed in the serial monitor, at constant time intervals.
 
-        to stop the Serial Monitor in the Terminal, you have to press Ctrl+C
-        after clicking into it
+
+        ## CAN Bus
+
+        A Can-Frame looks like this:
+
+
+        ![CAN
+        Frame](https://elearning.vector.com/pluginfile.php/123/mod_page/content/12/CAN_5.5_GRA_ErrorDetection_DE.png)
+
+        - The SOF (Start of Frame) synchronizes all Nodes
+
+        - The Identifier (11 bit) is the used to give each message a unique ID,
+        it must not be 0
+
+        - The DLC (Data Lenght Code) is used to tell all other Nodes on the bus
+        how many Databyts will be transmitted
+
+        - The Datafield contains 1-8 bytes of data
+
+
+        In our case the other STM is configured so that we are able to change
+        the ID of the Message, but it will always return the maximum of 8 bytes.
+
+
+        ## I2S protocol
+
+        The I2S protocol is configured in I2S Phillips at 16kHz and 16bit Data
+        on 16 bit Data frames. Therefore the transmitted data should be stored
+        in a `int16_t` array. Be aware, that the protocol is originally intened
+        for the continous transmission of audio data und thus does not have any
+        CRC checks.
+
+
+        The other STM is configured to interpret the sucession of `0`, the
+        maximum value for `int16_t`, `0`, minimum value for `int16_t` as SOF.
+
+        This must directly be followed by the ID for the CAN message.
+
+        Afterwards the 4 following values are weill be send back in the data
+        field and each byte will be printed seperatly.
+
+
+        To send the audio data you can use `HAL_I2S_Transmit(I2S_HandleTypeDef
+        *hi2s, uint16_t *pData, uint16_t Size, uint32_t Timeout);`.
+
+        The STM32 is configured to use I2S1.
+
+
+
+        ## Step 1: write the data structure to store the SOF, the ID and your
+        data in
+
+        ## Step 2: fill it with some test data
+
+        ## Step 3: send the data via I2S and watch how it is returned
+
+        ## Step 4: change your code so theat you can use each of the 8 bytes of
+        the Datafield seperately
     studentConfig:
       content: ''
     teacherConfig:
